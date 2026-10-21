@@ -5,7 +5,7 @@ Extensión para SQL Server Management Studio (SSMS) que permite generar el scrip
 En lugar de buscar manualmente el objeto en el Explorador de objetos, basta con seleccionar una referencia como:
 
 ```sql
-EXEC dbo.spRepVacaciones
+EXEC dbo.spReporte2026
 ```
 
 y utilizar una de las acciones agregadas al menú contextual del editor.
@@ -33,10 +33,10 @@ Genera dos lotes independientes:
 Los lotes se separan con `GO`, por ejemplo:
 
 ```sql
-DROP PROCEDURE IF EXISTS [dbo].[spRepVacaciones]
+DROP PROCEDURE IF EXISTS [dbo].[spReporte2026]
 GO
 
-CREATE PROCEDURE [dbo].[spRepVacaciones]
+CREATE PROCEDURE [dbo].[spReporte2026]
 AS
 BEGIN
     -- Definición del procedimiento
@@ -51,7 +51,7 @@ GO
 Cuando el servidor admite `CREATE OR ALTER`, la extensión solicita a SMO esa modalidad:
 
 ```sql
-CREATE OR ALTER PROCEDURE [dbo].[spRepVacaciones]
+CREATE OR ALTER PROCEDURE [dbo].[spReporte2026]
 AS
 BEGIN
     -- Definición del procedimiento
@@ -62,7 +62,7 @@ GO
 `CREATE OR ALTER` requiere SQL Server 2016 SP1 o posterior. Si el servidor no lo admite, la extensión conserva la definición generada por SMO y cambia únicamente el encabezado a una instrucción `ALTER` compatible:
 
 ```sql
-ALTER PROCEDURE [dbo].[spRepVacaciones]
+ALTER PROCEDURE [dbo].[spReporte2026]
 AS
 BEGIN
     -- Definición del procedimiento
@@ -77,11 +77,11 @@ Para objetos existentes, `ALTER` evita eliminarlos y normalmente conserva sus pe
 La selección puede contener solamente el nombre o una invocación `EXEC`/`EXECUTE`:
 
 ```sql
-spRepVacaciones
-dbo.spRepVacaciones
-[dbo].[spRepVacaciones]
-EXEC dbo.spRepVacaciones
-EXEC dbo.spRepVacaciones @Empleado = 10
+spReporte2026
+dbo.spReporte2026
+[dbo].[spReporte2026]
+EXEC dbo.spReporte2026
+EXEC dbo.spReporte2026 @Empleado = 10
 EXEC @resultado = [rrhh].[sp Rep Vacaciones]
 [Nomina].[dbo].[vwVacaciones]
 ```
@@ -210,7 +210,7 @@ SsmsObjectScripter/
 ### El objeto no se encuentra
 
 - Verifica que la consulta esté conectada a la base correcta.
-- Incluye el esquema en la selección, por ejemplo `dbo.spRepVacaciones`.
+- Incluye el esquema en la selección, por ejemplo `dbo.spReporte2026`.
 - Para otra base de datos, utiliza `[Base].[dbo].[Objeto]`.
 - Comprueba que la cuenta tenga permiso `VIEW DEFINITION`.
 
